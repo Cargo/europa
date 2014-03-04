@@ -25,6 +25,9 @@ var Design = {
 
 		// Fix the loading animations
 		Cargo.Core.ReplaceLoadingAnims.init();
+
+		// Do not scroll to top on index show
+		Cargo.Model.DisplayOptions.attributes.disable_project_scroll = true;
 	},
 
 	keybindings: function() {
@@ -92,10 +95,11 @@ var Design = {
 
 	mobileIcons: function() {
 		if (navigator.userAgent.match(/i(Phone|Pod|Pad)/i)) {
+			$(".project_nav").addClass("mobile_format")
 			$(".goto.prev").text("▲");
 			$(".goto.next").text("▼");
 			$(".project_nav .previous").text("◀");
-			$(".project_nav .next").text("◀");
+			$(".project_nav .next").text("◀").addClass('mobilerotate');
 		}
 	},
 
@@ -121,6 +125,7 @@ var Design = {
 	page: {
 		init: function() {
 			$("body").attr("data-view", "page");
+			$("html, body").scrollTop(0);
 		}
 	},
 
@@ -184,6 +189,10 @@ Cargo.Event.on("pagination_complete", function() {
 	$("body > .retinaSpinner").css("display", "");
 });
 
+Cargo.Event.on("fullscreen_destroy_hotkeys", function() {
+    Design.keybindings();
+});
+
 /* Some non-api events merged into an object for less clutter */
 $.each({
 	slideshow_resize: function(el, obj) {
@@ -197,7 +206,7 @@ $.each({
 			adjustElementsToWindowHeight: Cargo.Model.DisplayOptions.attributes.image_scale_vertical
 		});
 	},
-	freshbox_destroy_hotkeys: function() {
+	fullscreen_destroy_hotkeys: function() {
 		Design.keybindings();
 	}
 }, function(event, callback) {

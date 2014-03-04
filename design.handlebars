@@ -7,8 +7,7 @@
 		<meta name="description" content="{{ site.meta_description }}">
 		<meta name="keywords" content="{{ site.meta_tags }}">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<meta name="viewport" content="initial-scale=1, user-scalable=no">
-
+		
 		{{{ site.meta_head }}}
 
 		<link href="{{ site.favicon_url }}" rel="shortcut icon">
@@ -47,7 +46,7 @@
 			{{/if}}
 
 			<div class="header_text">
-				<a href="{{ site.direct_link }}" {{#unless_any route.search route.is_set}}rel="show_index"{{/unless_any}}>
+				<a href="{{ site.direct_link }}" {{#if_any route.search route.is_set}}{{else}}rel="show_index"{{/if_any}}>
 					{{{ site.header_text }}}
 				</a>
 			</div>
@@ -201,15 +200,14 @@
 				</div>
 			{{/projects}}
 
-
-			<div class="show_index">
-				<a href="{{ site.direct_link }}">View all</a>
-			</div>
-
 		</div>
 
+		<div class="show_index">
+			<a href="{{ site.direct_link }}">View all</a>
+		</div>
+			
 		<div id="autopaginate_loader" class="moreload" data-view="Autopaginate" data-preload_distance="1500">
-			<img src="/_gfx/loadingAnim.gif" class="loading">
+			{{>loading_animation}}
 		</div>
 
 {{/route}}

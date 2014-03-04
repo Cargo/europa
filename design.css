@@ -254,6 +254,7 @@ body[data-view="index"] .container {
 
 .project_header .project_nav a.previous,
 .project_header .project_nav a.next {
+	color: rgba(0, 0, 0, 0.25);
 	padding: 5px 16px;
 }
 
@@ -276,7 +277,11 @@ body[data-view="index"] .container {
 	filter:alpha(opacity=60);
 }
 
-
+.project_header .project_nav.mobile_format a.next {
+	-webkit-transform: rotate(180deg);
+	-moz-transform: rotate(180deg);
+	transform: rotate(180deg);
+}
 
 .project_header .project_nav a.index {
 	position: absolute;
@@ -332,6 +337,12 @@ body[data-view="index"] .container {
 
 .project_header .project_nav a.index:active span {
 	background: rgba(128, 128, 128, 0.6);
+}
+
+.project_nav .next.mobilerotate {
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 
 .entry {
